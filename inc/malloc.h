@@ -13,11 +13,20 @@
 #ifndef MALLOC_H
 # define MALLOC_H
 
+# include <sys/mman.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
-void free(void *ptr);
-void *malloc(size_t size);
-void *realloc(void *ptr, size_t size);
+struct malloc_block
+{
+    size_t              size;
+    struct malloc_block *next;
+    struct malloc_block *prev;
+};
+
+void ft_free(void *ptr);
+void *ft_malloc(size_t size);
+void *ft_realloc(void *ptr, size_t size);
 
 #endif

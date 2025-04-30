@@ -11,10 +11,17 @@
 /* ************************************************************************** */
 
 #include "malloc.h"
+#include <stdio.h>
+#include <bits/mman-linux.h>
 
-void *malloc(size_t size)
+void *ft_malloc(size_t size)
 {
-	(void)size;
-	write(1, "malloc\n", 6);
-	return (NULL);
+
+	
+	void *result = mmap(NULL, size, PROT_READ | PROT_WRITE,
+		MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	
+
+	printf("malloc\n");
+	return (result);
 }

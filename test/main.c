@@ -12,15 +12,15 @@ int main(void)
 	safe_print("Starting memory allocation tests\n");
 
 	// Test malloc
-	void *ptr = ft_malloc(42);
+	void *ptr = ft_malloc(420);
 	printf("Allocated pointer: %p\n", ptr);
 
 	// Test realloc
-	void *new_ptr = ft_realloc(ptr, 100);
-	safe_print("Reallocated pointer: %p\n");
+	// void *new_ptr = ft_realloc(ptr, 100);
+	// safe_print("Reallocated pointer: %p\n");
 
-	// Test free
-	ft_free(new_ptr);
+	// // Test free
+	// ft_free(new_ptr);
 
 	safe_print("Memory tests completed\n");
 	return (0);

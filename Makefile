@@ -10,6 +10,7 @@ HEADERS		=	malloc.h
 SRCS		=	free.c		\
 				malloc.c	\
 				realloc.c	\
+				malloc_block_utils.c
 
 #					Directories
 
@@ -70,7 +71,7 @@ LINK_NAME	=	libft_malloc.so
 
 AR			=	ar rc
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -fPIC -g
 
 CC			=	cc
 

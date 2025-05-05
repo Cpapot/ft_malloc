@@ -24,14 +24,31 @@ int	find_zone_type(size_t size)
 		return LARGE;
 }
 
-size_t get_zone_size(int type, size_t size)
+size_t	get_zone_size(int type, size_t size)
 {
-	//size_t	page_size = getpagesize();
-
 	if (type == TINY)
 		return N + (N / n) * sizeof(t_malloc_pool);
 	else if (type == SMALL)
 		return M + (M / m) * sizeof(t_malloc_pool);
 	else
 		return size;
+}
+
+void	*get_allocated_ptr(t_malloc_block *block, size_t size, int type)
+{
+	if (type == LARGE)
+		return (block->blockStart);
+	t_malloc_pool *current = block->pool;
+	while (current != NULL)
+	{
+		if (current->isAllocated == false)
+		{
+			block->emptyPool--;
+			current->isAllocated = true;
+			current->size = size;
+			return (current->ptr);
+		}
+		current = current->next;
+	}
+	return (NULL);
 }

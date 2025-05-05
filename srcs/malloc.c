@@ -12,7 +12,6 @@
 
 #include "../inc/malloc.h"
 
-//LARGE NOT IMPLEMENTED YET
 void	*ft_malloc(size_t size)
 {
 	t_malloc_block	*freeBlock = NULL;
@@ -20,29 +19,14 @@ void	*ft_malloc(size_t size)
 	if (type == 0)
 		return (NULL);
 
-	printf("\ntype: %d\n", type);
-
 	freeBlock = find_free_block(type);
 	if (freeBlock == NULL)
 	{
-		printf("no empty block found, allocating...\n");
-		freeBlock = malloc_add_lst(size, type);
+		freeBlock = allocate_block(size, type);
 		if (freeBlock == NULL)
-		{
-			printf("mmap failed\n");
 			return (NULL);
-		}
-		return allocate_block(freeBlock, size, type);
+		return get_allocated_ptr(freeBlock, size, type);
 	}
 	else
-	{
-		return allocate_block(freeBlock, size, type);
-	}
-
-	// on check si dans la liste chainee il y a un block de memoire libre
-	// si oui on le renvoie a la bonne taille
-	// sinon on mmap un nouveau block de memoire
-	// on l'ajoute a la liste chainee
-	// on renvoie le block de memoire
-	return (NULL);
+		return get_allocated_ptr(freeBlock, size, type);
 }

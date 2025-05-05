@@ -15,28 +15,24 @@ int main(void)
 
 	// Test malloc
 	// void *ptr = ft_malloc(sizeof(char) * 100);
-
-
 	// void *scdptr = ft_malloc(sizeof(char) * 100);
 
 
-	for(int i = 0; i < 500; i++)
-	{
-		ft_malloc(sizeof(char) * 128);
-	}
-	for(int i = 0; i < 500; i++)
-	{
-		ft_malloc(sizeof(char) * 64);
-	}
-	// ft_free(ptr);
-	// ft_free(scdptr);
-	// Test realloc
-	// void *new_ptr = ft_realloc(ptr, 100);
-	// safe_print("Reallocated pointer: %p\n");
+	void *smallptr = ft_malloc(sizeof(char) * 128);
+	
+	void *tinyptr = ft_malloc(sizeof(char) * 64);
 
-	// // Test free
-	// ft_free(new_ptr);
+	void *largeptr = ft_malloc(sizeof(char) * 20000);
+
 	safe_print("\n");
+	show_alloc_mem();
+
+	ft_free(smallptr);
+	ft_free(tinyptr);
+	ft_free(largeptr);
+
+	safe_print("\n");
+
 	show_alloc_mem();
 
 	safe_print("Memory tests completed\n");

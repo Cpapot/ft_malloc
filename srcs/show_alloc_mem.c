@@ -87,7 +87,6 @@ void putTypeAndPtr(int type, void *ptr)
 		putstr("\n");
 }
 
-//LARGE NOT IMPLEMENTED YET
 void	show_alloc_mem()
 {
 	size_t		totalBytes = 0;
@@ -114,6 +113,12 @@ void	show_alloc_mem()
 				}
 				currentPool = currentPool->next;
 			}
+		}
+		else
+		{
+			putptr(current->blockStart), putstr(" - "), putptr(current->blockStart + current->totalSize);
+			putstr(" : "), putnbr(current->totalSize), putstr(" bytes\n");
+			totalBytes += current->totalSize;
 		}
 		current = current->next;
 	}

@@ -15,7 +15,7 @@
 
 t_malloc_block *allocatedData = NULL;
 
-void		*find_free_block(int type)
+t_malloc_block		*find_free_block(int type)
 {
 	t_malloc_block	*current = allocatedData;
 
@@ -24,7 +24,6 @@ void		*find_free_block(int type)
 		if (current->zoneType == type && current->emptyPool > 0)
 		{
 			//current->isAllocated = true;
-			printf("found free pool for type %d in block %p\n", type, current->blockStart);
 			return (current);
 		}
 		current = current->next;
@@ -36,7 +35,6 @@ void pool_add(t_malloc_pool **pool, t_malloc_pool *new)
 {
 	if (*pool == NULL)
 	{
-		printf("pool is NULL\n");
 		*pool = new;
 		new->next = NULL;
 	}
@@ -45,7 +43,6 @@ void pool_add(t_malloc_pool **pool, t_malloc_pool *new)
 		t_malloc_pool *current = *pool;
 		while (current->next != NULL)
 			current = current->next;
-		//printf("pool is not NULL\n");
 		current->next = new;
 		new->next = NULL;
 	}
@@ -92,12 +89,21 @@ void	populate_pool(t_malloc_block *block, int type)
 	}
 }
 
-// quand on appelle cette fonction on doit deja avoir verifier qu'il n'y a pas de block libre dans la liste
-// TODO: peut etre ajouter le block au debut de la liste si elle n'est pas vide pour eviter de la parcourir a chaque fois si il reste de la place dans le block (TINY & SMALL allocation)
-void		*malloc_add_lst(size_t size, int type)
+bool	free_block(t_malloc_block *block)
 {
-	// quand on alloue un block de memoire on ajoute la taille de la liste tel que mmap(size + sizeof(t_malloc_block *)) puis on l'ajoute a la suite de la liste
-	// et si la liste est vide on l'ajoute au debut
+	if (block->prev != NULL)
+		block->prev->next = block->next;
+	if (block->next != NULL)
+		block->next->prev = block->prev;
+	if (allocatedData == block)
+		allocatedData = block->next;
+	if (munmap(block, block->totalSize + sizeof(t_malloc_block *)) == -1)
+		return false;
+	return true;
+}
+
+void		*allocate_block(size_t size, int type)
+{
 	size_t	zone_size = get_zone_size(type, size);
 
 	void	*data = mmap(NULL, zone_size + sizeof(t_malloc_block *),
@@ -105,10 +111,7 @@ void		*malloc_add_lst(size_t size, int type)
 	if (data == MAP_FAILED)
 		return (NULL);
 
-	printf("mmap success for block(type: %d) of %zu bytes at: %p\n", type, zone_size + sizeof(t_malloc_block *) , data);
-
 	t_malloc_block *new_block = (t_malloc_block *)data;
-	// penser a free t_malloc_block
 	new_block->blockStart = (void *)((char *)data + sizeof(t_malloc_block));
 	new_block->totalSize = zone_size;
 	new_block->next = NULL;
@@ -129,24 +132,4 @@ void		*malloc_add_lst(size_t size, int type)
 	populate_pool(new_block, type);
 	return (new_block);
 
-}
-
-void		*allocate_block(t_malloc_block *block, size_t size, int type)
-{
-	//on trouve le block de la pool qui est libre on return le ptr et on set isAllocated a true
-	if (type == LARGE)
-		return (block->blockStart);
-	t_malloc_pool *current = block->pool;
-	while (current != NULL)
-	{
-		if (current->isAllocated == false)
-		{
-			block->emptyPool--;
-			current->isAllocated = true;
-			current->size = size;
-			return (current->ptr);
-		}
-		current = current->next;
-	}
-	return (NULL);
 }

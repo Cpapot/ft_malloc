@@ -28,12 +28,44 @@ int main(void)
 	show_alloc_mem();
 
 	ft_free(smallptr);
-	ft_free(tinyptr);
+
 	ft_free(largeptr);
 
 	safe_print("\n");
 
 	show_alloc_mem();
+
+	safe_print("\n");
+
+	tinyptr = ft_realloc(tinyptr, 50);
+
+	for (int i = 0; i < 50; i++)
+	{
+		((char *)tinyptr)[i] = 'a';
+	}
+	((char *)tinyptr)[49] = '\0';
+
+	safe_print(tinyptr);
+	safe_print("\n");
+
+	show_alloc_mem();
+
+	tinyptr = ft_realloc(tinyptr, 10000);
+
+	safe_print(tinyptr);
+	safe_print("\n");
+
+	safe_print("\n");
+
+	show_alloc_mem();
+
+	ft_free (tinyptr);
+
+	safe_print("\n");
+
+	show_alloc_mem();
+
+	safe_print("\n");
 
 	safe_print("Memory tests completed\n");
 	return (0);

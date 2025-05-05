@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:49:38 by cpapot            #+#    #+#             */
-/*   Updated: 2025/04/28 13:21:19 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/05 16:51:02 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void ft_free(void *ptr)
 {
+	// on parcoure la liste chainee pour trouver le block de memoire
 	(void)ptr;
-	write(1, "free\n", 5);
+	// si
 }

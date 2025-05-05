@@ -7,10 +7,12 @@
 
 HEADERS		=	malloc.h
 
-SRCS		=	free.c		\
-				malloc.c	\
-				realloc.c	\
-				malloc_block_utils.c
+SRCS		=	free.c					\
+				malloc.c				\
+				realloc.c				\
+				malloc_block_utils.c	\
+				malloc_utils.c			\
+				show_alloc_mem.c
 
 #					Directories
 
@@ -67,6 +69,7 @@ ifeq ($(HOSTTYPE),)
 endif
 
 NAME		=	libft_malloc_$(HOSTTYPE).so
+TEST_NAME	=	malloc_tests
 LINK_NAME	=	libft_malloc.so
 
 AR			=	ar rc
@@ -125,6 +128,7 @@ fclean:
 	@${RM} ${OBJSDIR}
 	@${RM} ${NAME}
 	@${RM} ${LINK_NAME}
+	@${RM} ${TEST_NAME}
 
 reobj:
 	rm -rf $(OBJSDIR)
@@ -137,4 +141,8 @@ re:
 	@${MAKE} --no-print-directory fclean
 	@${MAKE} --no-print-directory all
 
-.PHONY : re all clean fclean printf lib header
+test: all
+	@${CC} -g -o ${TEST_NAME} ./test/main.c -L. -lft_malloc -Wl,-rpath=$(PWD)
+	@echo "	${GREEN}${TEST_NAME} : 🆗${DEFAULT}"
+
+.PHONY : re all clean fclean printf lib header reobj

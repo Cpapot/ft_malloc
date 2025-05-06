@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:49:38 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/05 16:51:02 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/06 22:15:06 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void ft_free(void *ptr)
 {
 	if (ptr == NULL)
 		return ;
-	t_malloc_block *current = allocatedData;
+	t_malloc_block *current = mallocData.allocatedData;
 
 	while (current != NULL)
 	{

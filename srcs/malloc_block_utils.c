@@ -6,18 +6,16 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 10:41:12 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/05 18:29:16 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/06 22:14:14 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/malloc.h"
 #include <bits/mman-linux.h>
 
-t_malloc_block *allocatedData = NULL;
-
 t_malloc_block		*find_free_block(int type)
 {
-	t_malloc_block	*current = allocatedData;
+	t_malloc_block	*current = mallocData.allocatedData;
 
 	while (current != NULL)
 	{
@@ -95,8 +93,8 @@ bool	free_block(t_malloc_block *block)
 		block->prev->next = block->next;
 	if (block->next != NULL)
 		block->next->prev = block->prev;
-	if (allocatedData == block)
-		allocatedData = block->next;
+	if (mallocData.allocatedData == block)
+		mallocData.allocatedData = block->next;
 	if (munmap(block, block->totalSize + sizeof(t_malloc_block *)) == -1)
 		return false;
 	return true;
@@ -116,14 +114,14 @@ void		*allocate_block(size_t size, int type)
 	new_block->totalSize = zone_size;
 	new_block->next = NULL;
 	new_block->zoneType = type;
-	if (allocatedData == NULL)
+	if (mallocData.allocatedData == NULL)
 	{
 		new_block->prev = NULL;
-		allocatedData = new_block;
+		mallocData.allocatedData = new_block;
 	}
 	else
 	{
-		t_malloc_block *last = allocatedData;
+		t_malloc_block *last = mallocData.allocatedData;
 		while (last->next != NULL)
 			last = last->next;
 		last->next = new_block;

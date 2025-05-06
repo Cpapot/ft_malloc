@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_alloc_mem.c                                   :+:      :+:    :+:   */
+/*   show_alloc_mem_ex.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 17:11:05 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/06 23:02:43 by cpapot           ###   ########.fr       */
+/*   Created: 2025/05/06 23:18:35 by cpapot            #+#    #+#             */
+/*   Updated: 2025/05/06 23:19:57 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../inc/str_utils.h"
 
 
-void	show_alloc_mem()
+void	show_alloc_mem_ex()
 {
 	size_t		totalBytes = 0;
 	size_t		totalAllocatedBytes = 0;
@@ -36,6 +36,8 @@ void	show_alloc_mem()
 				{
 					putptr(currentPool->ptr), putstr(" - "), putptr((void *)(currentPool->ptr + currentPool->size));
 					putstr(" : "), putnbr(currentPool->size), putstr(" bytes\n");
+					puthexadump(currentPool->ptr, currentPool->size);
+					putstr("\n");
 					totalBytes += currentPool->size;
 				}
 				currentPool = currentPool->next;
@@ -45,6 +47,8 @@ void	show_alloc_mem()
 		{
 			putptr(current->blockStart), putstr(" - "), putptr(current->blockStart + current->totalSize);
 			putstr(" : "), putnbr(current->totalSize), putstr(" bytes\n");
+			puthexadump(current->blockStart, current->totalSize);
+			putstr("\n");
 			totalBytes += current->totalSize;
 		}
 		current = current->next;

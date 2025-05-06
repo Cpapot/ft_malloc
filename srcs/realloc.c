@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:49:34 by cpapot            #+#    #+#             */
-/*   Updated: 2025/04/28 13:21:45 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/06 22:13:42 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void *ft_realloc(void *ptr, size_t size)
 		ft_free(ptr);
 		return (NULL);
 	}
-	t_malloc_block *current = allocatedData;
+	t_malloc_block *current = mallocData.allocatedData;
 	while (current != NULL)
 	{
 		if (ptr >= current->blockStart && ptr < current->blockStart + current->totalSize)

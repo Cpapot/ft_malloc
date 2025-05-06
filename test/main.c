@@ -8,7 +8,6 @@ void safe_print(const char *str)
 }
 
 
-
 int main(void)
 {
 	safe_print("\nStarting memory allocation tests\n");
@@ -17,58 +16,68 @@ int main(void)
 	// void *ptr = ft_malloc(sizeof(char) * 100);
 	// void *scdptr = ft_malloc(sizeof(char) * 100);
 
-
 	void *smallptr = ft_malloc(sizeof(char) * 128);
-	
+
 	void *tinyptr = ft_malloc(sizeof(char) * 64);
 
 	void *largeptr = ft_malloc(sizeof(char) * 20000);
 
-	safe_print("\n");
-	show_alloc_mem();
-
-	ft_free(smallptr);
-
-	ft_free(largeptr);
-
-	safe_print("\n");
-
-	show_alloc_mem();
-
-	safe_print("\n");
-
-	tinyptr = ft_realloc(tinyptr, 50);
-
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 128; i++)
 	{
-		((char *)tinyptr)[i] = 'a';
+		((char *)smallptr)[i] = 'z' + i;
 	}
-	((char *)tinyptr)[49] = '\0';
+	((char *)smallptr)[127] = '\0';
 
-	safe_print(tinyptr);
-	safe_print("\n");
+	for (int i = 0; i < 20000; i++)
+	{
+		((char *)largeptr)[i] = i;
+	}
+	((char *)largeptr)[20000] = '\0';
+	// safe_print("\n");
+	// show_alloc_mem();
 
-	show_alloc_mem();
+	// ft_free(smallptr);
 
-	tinyptr = ft_realloc(tinyptr, 10000);
+	// ft_free(largeptr);
 
-	safe_print(tinyptr);
-	safe_print("\n");
+	// safe_print("\n");
 
-	safe_print("\n");
+	// show_alloc_mem();
 
-	show_alloc_mem();
+	// safe_print("\n");
 
-	ft_free (tinyptr);
+	// tinyptr = ft_realloc(tinyptr, 50);
 
-	safe_print("\n");
+	// for (int i = 0; i < 50; i++)
+	// {
+	// 	((char *)tinyptr)[i] = 'a';
+	// }
+	// ((char *)tinyptr)[49] = '\0';
 
-	show_alloc_mem();
+	// safe_print(tinyptr);
+	// safe_print("\n");
 
-	safe_print("\n");
+	// show_alloc_mem();
+
+	// tinyptr = ft_realloc(tinyptr, 10000);
+
+	// safe_print(tinyptr);
+	// safe_print("\n");
+
+	// safe_print("\n");
+
+	// show_alloc_mem();
+
+	// ft_free(tinyptr);
+
+	// safe_print("\n");
+
+	// show_alloc_mem();
+
+	// safe_print("\n");
 
 	safe_print("Memory tests completed\n");
 	return (0);
 }
 
-//gcc -g -o test_main ./test/main.c -L. -lft_malloc -Wl,-rpath=$(pwd)
+// gcc -g -o test_main ./test/main.c -L. -lft_malloc -Wl,-rpath=$(pwd)

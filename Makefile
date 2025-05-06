@@ -5,14 +5,18 @@
 #				| |    | | |  __/\__ \.
 #				|_|    |_|_|\___||___/
 
-HEADERS		=	malloc.h
+HEADERS		=	malloc.h				\
+				str_utils.h
 
 SRCS		=	free.c					\
 				malloc.c				\
 				realloc.c				\
 				malloc_block_utils.c	\
 				malloc_utils.c			\
-				show_alloc_mem.c
+				show_alloc_mem.c		\
+				str_utils.c				\
+				malloc_debug.c			\
+				show_alloc_mem_ex.c		\
 
 #					Directories
 

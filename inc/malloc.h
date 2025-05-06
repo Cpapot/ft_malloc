@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:48:01 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/05 17:29:56 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/06 23:20:21 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,29 @@
 	struct malloc_block		*prev;
  }	t_malloc_block;
 
+ typedef struct malloc_data
+ {
+	t_malloc_block		*allocatedData;
+	bool				isLeaksDetectorInitialized;
+ }	t_malloc_data;
 
- extern t_malloc_block	*allocatedData;
+ extern t_malloc_data	mallocData;
 
 
  t_malloc_block		*find_free_block(int type);
  void				*allocate_block(size_t size, int type);
- bool	            free_block(t_malloc_block *block);
+ bool				free_block(t_malloc_block *block);
  void				*get_allocated_ptr(t_malloc_block *block, size_t size, int type);
 
  int				find_zone_type(size_t size);
  size_t				get_zone_size(int type, size_t size);
+ void				exit_debug();
 
  void				ft_free(void *ptr);
  void				*ft_malloc(size_t size);
  void				*ft_realloc(void *ptr, size_t size);
  void				show_alloc_mem();
+ void				show_alloc_mem_ex();
+
 
 #endif

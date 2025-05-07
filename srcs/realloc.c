@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:49:34 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/06 22:13:42 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/07 15:54:12 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,21 @@ void	*memcpy(void *dst, const void *src, size_t size)
 
 void	*delete_and_copy(void *ptr, size_t oldSize, size_t size)
 {
-	void *newPtr = ft_malloc(size);
+	void *newPtr = malloc(size);
 	if (newPtr == NULL)
 		return (NULL);
 	newPtr = memcpy(newPtr, ptr, oldSize);
-	ft_free(ptr);
+	free(ptr);
 	return (newPtr);
 }
 
-void *ft_realloc(void *ptr, size_t size)
+void *realloc(void *ptr, size_t size)
 {
 	if (ptr == NULL)
-		return (ft_malloc(size));
+		return (malloc(size));
 	if (size == 0)
 	{
-		ft_free(ptr);
+		free(ptr);
 		return (NULL);
 	}
 	t_malloc_block *current = mallocData.allocatedData;

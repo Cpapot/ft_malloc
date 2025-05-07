@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:48:01 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/07 15:37:50 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/07 15:53:27 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@
  void				block_free_debug(t_malloc_block *block, void *ptr, size_t size);
  void				exit_debug();
 
- void				ft_free(void *ptr);
- void				*ft_malloc(size_t size);
- void				*ft_realloc(void *ptr, size_t size);
+ void				free(void *ptr);
+ void				*malloc(size_t size);
+ void				*realloc(void *ptr, size_t size);
  void				show_alloc_mem();
  void				show_alloc_mem_ex();
 

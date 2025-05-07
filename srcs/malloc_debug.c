@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:51 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/07 15:35:21 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:20:58 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void block_allocate_debug(t_malloc_block *block)
 			putstr(", "), putnbr(block->totalPool), putstr(" pools of "), putnbr(block->poolSize);
 		else
 			putstr(", of "), putnbr(block->totalSize);
-		putstr("bytes\n\e[0m");
+		putstr(" bytes\n\e[0m");
 	}
 }
 

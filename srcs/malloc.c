@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:49:36 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/07 15:23:09 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/07 15:52:57 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void init_leaks_detector()
 		putstr("Error registering debug function\n");
 }
 
-void	*ft_malloc(size_t size)
+void	*malloc(size_t size)
 {
 	t_malloc_block	*freeBlock	= NULL;
 	int				type		= find_zone_type(size);

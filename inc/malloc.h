@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:48:01 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/06 23:20:21 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/07 15:37:50 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@
  {
 	t_malloc_block		*allocatedData;
 	bool				isLeaksDetectorInitialized;
+	bool				onClose;
  }	t_malloc_data;
 
  extern t_malloc_data	mallocData;
@@ -70,6 +71,10 @@
 
  int				find_zone_type(size_t size);
  size_t				get_zone_size(int type, size_t size);
+
+ void				clean_freed_memory(void *ptr, size_t size);
+ void				block_allocate_debug(t_malloc_block *block);
+ void				block_free_debug(t_malloc_block *block, void *ptr, size_t size);
  void				exit_debug();
 
  void				ft_free(void *ptr);

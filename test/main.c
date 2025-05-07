@@ -17,10 +17,12 @@ int main(void)
 	// void *scdptr = ft_malloc(sizeof(char) * 100);
 
 	void *smallptr = ft_malloc(sizeof(char) * 128);
+	void *smallptr3 = ft_malloc(sizeof(char) * 128);
 
-	void *tinyptr = ft_malloc(sizeof(char) * 64);
 
-	void *largeptr = ft_malloc(sizeof(char) * 20000);
+	// void *tinyptr = ft_malloc(sizeof(char) * 64);
+
+	// void *largeptr = ft_malloc(sizeof(char) * 20000);
 
 	for (int i = 0; i < 128; i++)
 	{
@@ -28,11 +30,18 @@ int main(void)
 	}
 	((char *)smallptr)[127] = '\0';
 
-	for (int i = 0; i < 20000; i++)
-	{
-		((char *)largeptr)[i] = i;
-	}
-	((char *)largeptr)[20000] = '\0';
+
+	ft_free(smallptr);
+
+	void *smallptr2 = ft_malloc(sizeof(char) * 128);
+	// for (int i = 0; i < 20000; i++)
+	// {
+		// 	((char *)largeptr)[i] = i;
+		// }
+		// ((char *)largeptr)[20000] = '\0';
+
+	//ft_free(largeptr);
+
 	// safe_print("\n");
 	// show_alloc_mem();
 

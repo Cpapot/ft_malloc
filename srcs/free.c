@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:49:38 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/06 22:15:06 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/07 15:36:17 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void ft_free(void *ptr)
 				{
 					if (ptr == currentPool->ptr)
 					{
+						block_free_debug(current, ptr, currentPool->size);
+						clean_freed_memory(ptr, currentPool->size);
 						currentPool->isAllocated = false;
 						current->emptyPool++;
 						if (current->emptyPool == current->totalPool)
@@ -46,6 +48,8 @@ void ft_free(void *ptr)
 			}
 			else
 			{
+				clean_freed_memory(ptr, current->totalSize);
+				block_free_debug(current, ptr, current->totalSize);
 				if (free_block(current) == false)
 				{
 					write(2, "Error: failed to free block\n", 29);

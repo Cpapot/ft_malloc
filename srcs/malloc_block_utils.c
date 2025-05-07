@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 10:41:12 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/06 22:14:14 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/07 14:09:12 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void		*allocate_block(size_t size, int type)
 		new_block->prev = last;
 	}
 	populate_pool(new_block, type);
+	block_allocate_debug(new_block);
 	return (new_block);
 
 }

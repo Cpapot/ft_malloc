@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 10:41:12 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/07 14:09:12 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:08:04 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ t_malloc_block		*find_free_block(int type)
 	while (current != NULL)
 	{
 		if (current->zoneType == type && current->emptyPool > 0)
-		{
-			//current->isAllocated = true;
 			return (current);
-		}
 		current = current->next;
 	}
 	return (NULL);
@@ -95,7 +92,7 @@ bool	free_block(t_malloc_block *block)
 		block->next->prev = block->prev;
 	if (mallocData.allocatedData == block)
 		mallocData.allocatedData = block->next;
-	if (munmap(block, block->totalSize + sizeof(t_malloc_block *)) == -1)
+	if (munmap(block, find_pagesize_multiple(block->totalSize + sizeof(t_malloc_block *))) == -1)
 		return false;
 	return true;
 }
@@ -104,7 +101,7 @@ void		*allocate_block(size_t size, int type)
 {
 	size_t	zone_size = get_zone_size(type, size);
 
-	void	*data = mmap(NULL, zone_size + sizeof(t_malloc_block *),
+	void	*data = mmap(NULL, find_pagesize_multiple(zone_size + sizeof(t_malloc_block *)),
 			PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	if (data == MAP_FAILED)
 		return (NULL);

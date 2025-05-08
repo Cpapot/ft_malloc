@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:48:01 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/07 15:53:27 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:15:49 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
  void				*get_allocated_ptr(t_malloc_block *block, size_t size, int type);
 
  int				find_zone_type(size_t size);
+ size_t				find_pagesize_multiple(size_t size);
  size_t				get_zone_size(int type, size_t size);
 
  void				clean_freed_memory(void *ptr, size_t size);

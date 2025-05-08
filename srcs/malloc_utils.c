@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:15:44 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/05 18:25:20 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:06:01 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ int	find_zone_type(size_t size)
 		return SMALL;
 	else
 		return LARGE;
+}
+
+size_t		find_pagesize_multiple(size_t size)
+{
+	size_t	page_size = sysconf(_SC_PAGESIZE);
+
+	if (size % page_size == 0)
+		return size;
+	else
+		return ((size / page_size) + 1) * page_size;
 }
 
 size_t	get_zone_size(int type, size_t size)

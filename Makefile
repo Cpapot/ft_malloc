@@ -19,7 +19,8 @@ SRCS		=	free.c					\
 				show_alloc_mem_ex.c		\
 
 TESTSRCS	=	libft_tests.c			\
-				large_tests.c
+				large_tests.c			\
+				tiny_and_small_tests.c
 
 #					Directories
 
@@ -38,6 +39,10 @@ OBJSDIR			=	./.objs/
 #					Full Path
 
 TEST		=	$(addprefix $(TESTDIR),$(TESTSRCS))
+
+TEST_BINS	=	$(notdir $(basename $(TEST)))
+
+TEST_EXECS	=	$(addprefix $(TESTDIR), $(TEST_BINS))
 
 HEAD		=	$(addprefix $(HEADERSDIR),$(HEADERS))
 
@@ -140,7 +145,7 @@ fclean:
 	@${RM} ${OBJSDIR}
 	@${RM} ${NAME}
 	@${RM} ${LINK_NAME}
-	@${RM} ${TEST_NAME}
+	@${RM} $(addprefix $(TESTDIR), $(basename ${TESTSRCS}))
 	@${MAKE} --no-print-directory fclean -C ${LIBFTDIR}
 
 reobj:
@@ -154,16 +159,15 @@ libft:
 	@${MAKE} --no-print-directory all
 	@${MAKE} --no-print-directory -C ${LIBFTDIR} all
 
-test: libft all
-	@for test_src in $(TEST) ; do \
-		test_name=$$(basename $$test_src .c); \
-		echo "${SUPPR}${YELLOW}Compiling test: $$test_name ${DEFAULT}"; \
-		${CC} -g -o $(TESTDIR)$$test_name $$test_src -L./libft -lft -L. -lft_malloc -Wl,-rpath=$(PWD); \
-		echo "${SUPPR}	${GREEN}$$test_name : 🆗${DEFAULT}"; \
-	done
+$(TESTDIR)%: $(TESTDIR)%.c 
+	@test_name=$$(basename $< .c); \
+	${CC} -g -o $(TESTDIR)$$test_name $< -L./libft -lft -L. -lft_malloc -Wl,-rpath=$(PWD); \
+	echo "${GREEN}	$$test_name : 🆗${DEFAULT}";
+
+test: libft ${NAME} ${LINK_NAME} $(TEST_EXECS)
 
 re:
 	@${MAKE} --no-print-directory fclean
 	@${MAKE} --no-print-directory all
 
-.PHONY : re all clean fclean header reobj libft
+.PHONY : re all clean fclean header reobj libft test

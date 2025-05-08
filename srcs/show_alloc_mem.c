@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:11:05 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/06 23:02:43 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:16:36 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	show_alloc_mem()
 	t_malloc_block *current = mallocData.allocatedData;
 	while (current != NULL)
 	{
-		totalAllocatedBytes += current->totalSize + sizeof(t_malloc_block *);
+		totalAllocatedBytes += find_pagesize_multiple(current->totalSize + sizeof(t_malloc_block *));
 		putTypeAndPtr(current->zoneType, current->blockStart);
 		if (current->zoneType == 1 || current->zoneType == 2)
 		{

@@ -6,7 +6,8 @@
 #				|_|    |_|_|\___||___/
 
 HEADERS		=	malloc.h				\
-				str_utils.h
+				str_utils.h				\
+				malloc_intern.h
 
 SRCS		=	free.c					\
 				malloc.c				\
@@ -159,7 +160,7 @@ libft:
 	@${MAKE} --no-print-directory all
 	@${MAKE} --no-print-directory -C ${LIBFTDIR} all
 
-$(TESTDIR)%: $(TESTDIR)%.c 
+$(TESTDIR)%: $(TESTDIR)%.c
 	@test_name=$$(basename $< .c); \
 	${CC} -g -o $(TESTDIR)$$test_name $< -L./libft -lft -L. -lft_malloc -Wl,-rpath=$(PWD); \
 	echo "${GREEN}	$$test_name : 🆗${DEFAULT}";

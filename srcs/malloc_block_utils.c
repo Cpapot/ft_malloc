@@ -6,11 +6,11 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 10:41:12 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/08 17:08:04 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/10 15:12:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/malloc.h"
+#include "../inc/malloc_intern.h"
 #include <bits/mman-linux.h>
 
 t_malloc_block		*find_free_block(int type)

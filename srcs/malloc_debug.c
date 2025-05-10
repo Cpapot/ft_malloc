@@ -6,11 +6,11 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:18:51 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/07 16:20:58 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/10 15:12:42 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/malloc.h"
+#include "../inc/malloc_intern.h"
 #include "../inc/str_utils.h"
 
 /*

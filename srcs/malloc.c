@@ -6,11 +6,11 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:49:36 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/07 15:52:57 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/10 15:12:47 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/malloc.h"
+#include "../inc/malloc_intern.h"
 #include "../inc/str_utils.h"
 
 t_malloc_data mallocData = {NULL, false, false};

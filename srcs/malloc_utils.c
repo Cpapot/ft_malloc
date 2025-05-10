@@ -6,11 +6,11 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:15:44 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/08 17:06:01 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/05/10 15:12:45 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/malloc.h"
+#include "../inc/malloc_intern.h"
 
 int	find_zone_type(size_t size)
 {

@@ -65,7 +65,7 @@ export MALLOC_SHOW_LEAKS=1
 Automatically frees all memory leaks at program exit.
 
 ```bash
-export MALLOC_SHOW_LEAKS=1
+export MALLOC_FREE_LEAKS=1
 ```
 
 ### `MALLOC_SHOW_ALLOCATE`

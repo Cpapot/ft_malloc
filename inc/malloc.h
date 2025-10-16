@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:48:01 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/10 15:12:19 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/10/16 14:25:00 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <stdbool.h>
 # include <stdint.h>
 
-# define n		64
+# define n		256
 # define N		8192
-# define m		128
-# define M		16384
+# define m		4096
+# define M		32768
 
 void				free(void *ptr);
 void				*malloc(size_t size);

@@ -21,7 +21,8 @@ SRCS		=	free.c					\
 
 TESTSRCS	=	libft_tests.c			\
 				large_tests.c			\
-				tiny_and_small_tests.c
+				tiny_and_small_tests.c	\
+				test.c
 
 #					Directories
 
@@ -160,7 +161,7 @@ libft:
 	@${MAKE} --no-print-directory all
 	@${MAKE} --no-print-directory -C ${LIBFTDIR} all
 
-$(TESTDIR)%: $(TESTDIR)%.c
+$(TESTDIR)%: $(TESTDIR)%.c $(NAME) $(HEAD) $(SRCSPATH)
 	@test_name=$$(basename $< .c); \
 	${CC} -g -o $(TESTDIR)$$test_name $< -L./libft -lft -L. -lft_malloc -Wl,-rpath=$(PWD); \
 	echo "${GREEN}	$$test_name : 🆗${DEFAULT}";

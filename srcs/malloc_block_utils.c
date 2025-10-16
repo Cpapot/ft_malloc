@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 10:41:12 by cpapot            #+#    #+#             */
-/*   Updated: 2025/05/10 15:12:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/10/16 15:10:31 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void pool_add(t_malloc_pool **pool, t_malloc_pool *new)
 	}
 }
 
+//TODO supprimer les boucles for qui init toutes les pools d'un block
+// creer une fonction init_pool qui initialise une pool a la fois et la call quand on a besoins d'une pool
+// (car les pages faults sont actuellment elevé pour TINY et SMALL car on init tout d'un coup et pas au fur et a mesure)
 void	populate_pool(t_malloc_block *block, int type)
 {
 	if (type == TINY)

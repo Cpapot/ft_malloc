@@ -12,6 +12,8 @@
 
 #include "../inc/malloc_intern.h"
 
+t_malloc_pool	*init_unique_pool(int type, t_malloc_block *block);
+
 int	find_zone_type(size_t size)
 {
 	if (size == 0)
@@ -60,6 +62,8 @@ void	*get_allocated_ptr(t_malloc_block *block, size_t size, int type)
 			return (current->ptr);
 		}
 		current = current->next;
+		if (current == NULL && block->emptyPool != 0)
+			current = init_unique_pool(type, block);
 	}
 	return (NULL);
 }

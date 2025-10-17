@@ -39,6 +39,7 @@ typedef struct malloc_block
 	unsigned int			poolSize; // 0 si block est LARGE
 	unsigned int			totalPool; // 0 si block est LARGE
 	unsigned int			emptyPool; // 0 si block est LARGE
+	unsigned int			poolIndex; // 0 si block est LARGE
 	t_malloc_pool			*pool;	// NULL si block est LARGE
 	struct malloc_block		*next;
 	struct malloc_block		*prev;

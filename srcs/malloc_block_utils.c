@@ -43,6 +43,33 @@ void pool_add(t_malloc_pool **pool, t_malloc_pool *new)
 	}
 }
 
+t_malloc_pool	*init_unique_pool(int type, t_malloc_block *block)
+{
+	int index = block->poolIndex;
+	if (type == TINY)
+	{
+		t_malloc_pool *newPool = (t_malloc_pool*)((char*)block->blockStart + (sizeof(t_malloc_pool) + n) * index);
+		newPool->isAllocated = false;
+		newPool->ptr = (char *)block->blockStart + (sizeof(t_malloc_pool) + n) * index + sizeof(t_malloc_pool);
+		newPool->size = n;
+		pool_add(&block->pool, newPool);
+		block->poolIndex++;
+		return newPool;
+	}
+	else if (type == SMALL)
+	{
+		t_malloc_pool *newPool = (t_malloc_pool*)((char*)block->blockStart + (sizeof(t_malloc_pool) + m) * index);
+		newPool->isAllocated = false;
+		newPool->ptr = (char *)block->blockStart + (sizeof(t_malloc_pool) + m) * index + sizeof(t_malloc_pool);
+		newPool->size = m;
+		pool_add(&block->pool, newPool);
+		block->poolIndex++;
+		return newPool;
+	}
+	return NULL;
+}
+
+
 //TODO supprimer les boucles for qui init toutes les pools d'un block
 // creer une fonction init_pool qui initialise une pool a la fois et la call quand on a besoins d'une pool
 // (car les pages faults sont actuellment elevé pour TINY et SMALL car on init tout d'un coup et pas au fur et a mesure)
@@ -54,14 +81,16 @@ void	populate_pool(t_malloc_block *block, int type)
 		block->poolSize = n;
 		block->totalPool = N / n;
 		block->pool = NULL;
-		for (size_t i = 0; i < block->emptyPool; i++)
-		{
-			t_malloc_pool *newPool = (t_malloc_pool*)((char*)block->blockStart + (sizeof(t_malloc_pool) + n) * i);
-			newPool->isAllocated = false;
-			newPool->ptr = (char *)block->blockStart + (sizeof(t_malloc_pool) + n) * i + sizeof(t_malloc_pool);
-			newPool->size = n;
-			pool_add(&block->pool, newPool);
-		}
+		block->poolIndex = 0;
+		init_unique_pool(type, block);
+		// for (size_t i = 0; i < block->emptyPool; i++)
+		// {
+		// 	t_malloc_pool *newPool = (t_malloc_pool*)((char*)block->blockStart + (sizeof(t_malloc_pool) + n) * i);
+		// 	newPool->isAllocated = false;
+		// 	newPool->ptr = (char *)block->blockStart + (sizeof(t_malloc_pool) + n) * i + sizeof(t_malloc_pool);
+		// 	newPool->size = n;
+		// 	pool_add(&block->pool, newPool);
+		// }
 	}
 	else if (type == SMALL)
 	{
@@ -69,17 +98,20 @@ void	populate_pool(t_malloc_block *block, int type)
 		block->totalPool = M / m;
 		block->poolSize = m;
 		block->pool = NULL;
-		for (size_t i = 0; i < block->emptyPool; i++)
-		{
-			t_malloc_pool *newPool = (t_malloc_pool*)((char*)block->blockStart + (sizeof(t_malloc_pool) + m) * i);
-			newPool->isAllocated = false;
-			newPool->ptr = (char *)block->blockStart + (sizeof(t_malloc_pool) + m) * i + sizeof(t_malloc_pool);
-			newPool->size = m;
-			pool_add(&block->pool, newPool);
-		}
+		block->poolIndex = 0;
+		init_unique_pool(type, block);
+		// for (size_t i = 0; i < block->emptyPool; i++)
+		// {
+		// 	t_malloc_pool *newPool = (t_malloc_pool*)((char*)block->blockStart + (sizeof(t_malloc_pool) + m) * i);
+		// 	newPool->isAllocated = false;
+		// 	newPool->ptr = (char *)block->blockStart + (sizeof(t_malloc_pool) + m) * i + sizeof(t_malloc_pool);
+		// 	newPool->size = m;
+		// 	pool_add(&block->pool, newPool);
+		// }
 	}
 	else
 	{
+		block->poolIndex = 0;
 		block->pool = NULL;
 		block->emptyPool = 0;
 		block->totalPool = 0;

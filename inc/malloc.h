@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:48:01 by cpapot            #+#    #+#             */
-/*   Updated: 2025/10/16 14:25:00 by cpapot           ###   ########.fr       */
+/*   Updated: 2025/10/17 15:59:51 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <stdbool.h>
 # include <stdint.h>
 
-# define n		256
-# define N		8192
-# define m		4096
+# define n		1024
+# define N		32768
+# define m		1024
 # define M		32768
 
 void				free(void *ptr);

@@ -3,7 +3,7 @@
 #include "../libft/includes/libft.h"
 #include "../inc/malloc.h"
 
-#define SIZE 5000
+#define SIZE 1024
 
 void safe_print(const char *str)
 {
@@ -28,5 +28,6 @@ int		main()
 	{
 		free(buffer[i]);
 	}
+
 	return 0;
 }
